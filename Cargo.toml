@@ -1,0 +1,8 @@
+[package]
+name = "memory_usage"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+sysinfo = { version = "0.33.1", default-features = false, features = ["system"] }
+mem = { git = "https://github.com/bowarc/crates", package = "mem"}
