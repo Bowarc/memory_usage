@@ -107,8 +107,8 @@ fn display(filtered_processes: &[Process]) {
         PID_LABEL, NAME_LABEL, MEM_LABEL, VIRT_MEM_LABEL
     );
     println!(
-        "|{}|\n{header}\n{}",
-        "_".repeat(header.len() - 2),
+        "{}\n{header}\n{}",
+        "_".repeat(header.len()),
         "-".repeat(header.len())
     );
     filtered_processes.iter().for_each(|process| {
@@ -117,6 +117,7 @@ fn display(filtered_processes: &[Process]) {
             process.pid, process.name, process.mem, process.virt_mem
         )
     });
+    println!("{}", "-".repeat(header.len()));
 }
 
 fn main() {
