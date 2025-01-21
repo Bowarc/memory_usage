@@ -12,19 +12,22 @@ fn read_env() -> Result<(String, mem::Prefix), String> {
 Usage: memory_usage <process> [prefix]
 
 Arguments:
-  Required:            
-                      <process>     
+  Required:
+                      <process>
                       The name of the target process to monitor.
 
-  Optional:            
-                      [prefix]             
-                      Format for displaying memory sizes: 
+  Optional:
+                      [prefix]
+                      Format for displaying memory sizes:
                       `decimal` for base 10 (default),
                       `binary` for base 2. 
 
 Example:
   memory_usage my_process decimal
-  memory_usage my_process binary";
+  memory_usage my_process binary
+
+Source:
+  https://github.com/bowarc/memory_usage";
 
     let argv = std::env::args().collect::<Vec<_>>();
 
