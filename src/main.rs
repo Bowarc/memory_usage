@@ -60,12 +60,10 @@ Source:
 }
 
 fn display(filtered_processes: &[Process]) {
-    /*
-        |----------------------------------------------|
-        | PID | Process name | Memory | Virtual memory |
-        |-----|--------------|--------|----------------|
-        |     |              |        |                |
-    */
+    // ┌─────┬──────┬────────┬────────────────┐
+    // │ Pid │ Name │ Memory │ Virtual memory │
+    // ├─────┼──────┼────────┼────────────────┤
+    // └─────┴──────┴────────┴────────────────┘
 
     const PADDING: usize = 1; // Padding on each side
     const PID_LABEL: &str = "Pid";
@@ -130,9 +128,7 @@ fn display(filtered_processes: &[Process]) {
         "\u{2500}".repeat(virt_mem_cell_size)
     );
 
-    println!(
-        "{top_bar}\n{header}\n{middle_bar}",
-    );
+    println!("{top_bar}\n{header}\n{middle_bar}");
 
     filtered_processes.iter().for_each(|process| {
         println!(
@@ -160,7 +156,7 @@ fn main() {
     let mut filtered_processes = system
         .processes()
         .iter()
-        .flat_map(|(pid, process)| {
+        .filter_map(|(pid, process)| {
             let Some(process_name) = process.name().to_str() else {
                 eprintln!(
                     "Failed to convert name of pid {pid}: Invalid unicode '{:?}'",
