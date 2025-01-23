@@ -1,6 +1,6 @@
 struct Process {
     pid: String,
-    // The index, in the name, of where the 'target_process' matche starts
+    // The index, in the name, of where the 'target_process' match starts
     match_index: u64,
     name: String,
     mem: String,
