@@ -7,7 +7,7 @@ struct Process {
     virt_mem: String,
 }
 
-fn read_env() -> Result<(String, mem::Prefix), String> {
+fn read_env() -> (String, mem::Prefix) {
     const USAGE: &str = "
 Usage: memory_usage <process> [prefix]
 
@@ -56,7 +56,7 @@ Source:
         })
         .unwrap_or(mem::Prefix::Decimal);
 
-    Ok((target_process, prefix))
+    (target_process, prefix)
 }
 
 fn display(filtered_processes: &[Process]) {
@@ -145,13 +145,7 @@ fn main() {
             .with_processes(sysinfo::ProcessRefreshKind::nothing().with_memory()),
     );
 
-    let (target_process, prefix) = match read_env() {
-        Ok((target_process, prefix)) => (target_process, prefix),
-        Err(e) => {
-            eprintln!("{e}");
-            std::process::exit(1);
-        }
-    };
+    let (target_process, prefix) = read_env();
 
     let mut filtered_processes = system
         .processes()
