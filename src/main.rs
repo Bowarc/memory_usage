@@ -101,23 +101,46 @@ fn display(filtered_processes: &[Process]) {
             },
         );
 
-    // print headers
     let header = format!(
-        "|{:^pid_cell_size$}|{:^name_cell_size$}|{:^mem_cell_size$}|{:^virt_mem_cell_size$}|",
+        "\u{2502}{:^pid_cell_size$}\u{2502}{:^name_cell_size$}\u{2502}{:^mem_cell_size$}\u{2502}{:^virt_mem_cell_size$}\u{2502}",
         PID_LABEL, NAME_LABEL, MEM_LABEL, VIRT_MEM_LABEL
     );
-    println!(
-        "{}\n{header}\n{}",
-        "_".repeat(header.len()),
-        "-".repeat(header.len())
+    // let header_len_no_unicode =
+    //     pid_cell_size + name_cell_size + mem_cell_size + virt_mem_cell_size + (5/* Separators*/);
+
+    let top_bar = format!(
+        "\u{250C}{}\u{252C}{}\u{252C}{}\u{252C}{}\u{2510}",
+        "\u{2500}".repeat(pid_cell_size),
+        "\u{2500}".repeat(name_cell_size),
+        "\u{2500}".repeat(mem_cell_size),
+        "\u{2500}".repeat(virt_mem_cell_size)
     );
+    let middle_bar = format!(
+        "\u{251C}{}\u{253C}{}\u{253C}{}\u{253C}{}\u{2524}",
+        "\u{2500}".repeat(pid_cell_size),
+        "\u{2500}".repeat(name_cell_size),
+        "\u{2500}".repeat(mem_cell_size),
+        "\u{2500}".repeat(virt_mem_cell_size)
+    );
+    let bottom_bar = format!(
+        "\u{2514}{}\u{2534}{}\u{2534}{}\u{2534}{}\u{2518}",
+        "\u{2500}".repeat(pid_cell_size),
+        "\u{2500}".repeat(name_cell_size),
+        "\u{2500}".repeat(mem_cell_size),
+        "\u{2500}".repeat(virt_mem_cell_size)
+    );
+
+    println!(
+        "{top_bar}\n{header}\n{middle_bar}",
+    );
+
     filtered_processes.iter().for_each(|process| {
         println!(
-            "|{:^pid_cell_size$}|{:^name_cell_size$}|{:^mem_cell_size$}|{:^virt_mem_cell_size$}|",
+            "\u{2502}{:^pid_cell_size$}\u{2502}{:^name_cell_size$}\u{2502}{:^mem_cell_size$}\u{2502}{:^virt_mem_cell_size$}\u{2502}",
             process.pid, process.name, process.mem, process.virt_mem
         )
     });
-    println!("{}", "-".repeat(header.len()));
+    println!("{bottom_bar}");
 }
 
 fn main() {
