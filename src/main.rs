@@ -161,10 +161,6 @@ fn main() {
 
             let match_index = process_name.find(&target_process)? as u64;
 
-            if !process_name.contains(&target_process) {
-                return None;
-            }
-
             Some(Process {
                 pid: pid.to_string(),
                 match_index,
