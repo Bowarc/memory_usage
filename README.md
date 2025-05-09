@@ -5,7 +5,7 @@ But i couldn't find something simple enough that gave meaningful results, so ig 
 
 ## How to use:
 ```console
-cargo install --path .
+cargo install --git https://github.com/Bowarc/memory_usage
 ```
 This will compile and copy the binary to your `.cargo/bin` directory.  
 
